@@ -1,0 +1,130 @@
+1)
+00:00700293
+0000 0000 0111 0000 0000 0010 1001 0011
+op: 001 0011 -> tipo I
+rd: 0010 1 -> x5, t0
+funct 3: 000 -> addi
+rs1: 0000 0 -> x0, zero
+imm[11:0]: 0000 0000 0111 -> 7
+
+addi t0, zero, 7
+
+04:00100313
+0000 0000 0001 0000 0000 0011 0001 0011
+op: 001 0011 -> tipo I
+rd: 0011 0 -> x6, t1
+funct 3: 000 -> addi
+rsl: 0000 0 -> x0, zero
+imm[11:0]: 0000 0000 0001 -> 1
+
+addi t1, zero, 1
+
+08:0062f333
+0000 0000 0110 0010 1111 0011 0011 0011
+op: 011 0011 -> tipo R
+rd: 0011 0 -> x6, t1
+funct 3: 111 -> and
+rs1: 0010 1 -> x5, t0
+rs2: 0 0110 -> x6, t1
+funct7: 0000 000 -> -
+
+and t1, t0, t1
+
+0c:00030463
+0000 0000 0000 0011 0000 0100 0110 0011
+op: 110 0011 -> tipo B
+imm[4:1][11]: 0100 0 
+funct 3: 000 -> beq
+rs1: 0011 0 -> x6, t1
+rs2: 0 0000 -> x0, zero
+imm[12][10:5]: 0000 000
+imm: 0 0000 0000 1000 -> 8
+
+beq t1, zero, 8
+
+10:fff28293
+1111 1111 1111 0010 1000 0010 1001 0011
+op: 001 0011 -> tipo I
+rd: 0010 1 -> x5, t0
+funct 3: 000 -> addi
+rs1: 0010 1 -> x5, t0
+imm[11:0]: 1111 1111 1111 -> -1
+
+addi t0, t0, -1
+
+14:4012d293
+0100 0000 0001 0010 1101 0010 1001 0011
+op: 001 0011 -> tipo I
+rd: 0010 1 -> x5, t0
+funct 3: 101 -> dos opciones
+rs1: 0010 1 -> x5, t0
+imm[11:0]: imm[4:0]: 0 0001 -> 1
+	imm[5:11]: 0010 0000 -> 0x20 -> srai
+	
+srai t0, t0, 1
+
+2)
+	li a0, 4228 # carga el valor 4228 en a0
+	li a1, 2114 # carga el valor 2114 en a1
+	j resta # salta a la etiqueta "resta"
+fin: beq zero, zero, fin # si 0 es 0, va a "fin"
+
+resta: sub a0, a0, a1 # resta a0 con a1 y lo guarda en a0
+	beq a0, zero, fin # si a0 es 0, va a "fin"
+
+sigo: j resta # salta a "resta"
+
+a) fin: 0x14
+resta: 0x18
+sigo: 0x20
+
+b) PC: 0x10 -> PC: 0x18 (j resta 1) PC+=8
+PC: 0x14 -> PC: 0x14 (beq fin 1) PC-=8
+PC: 0x18 -> PC: 0x14 (beq fin 2) PC-=4
+PC: 0x20 -> PC: 0x18 (j resta 2) PC-=4
+
+c)
+rangoLI(2) = [1000 0000 0000 0000 0000 0000 0000 0000, 0111 1111 1111 1111 1111 1111 1111 1111]
+rangoLI(10) = [-2^{32-1}, 2^{32-1}-1] = [-2^{31}, 2^{31}-1]
+rangoADDI(2) = [1000 0000 0000, 0111 1111 1111]
+rangoADDI(10) = [-2^{12-1}, 2^{12-1}-1] = [-2048, 2047]
+
+d) Primero cargamos los 20 bits más altos con la instrucción lui(load upper inmediate) y luego los 12 bits más bajos con un
+addi. Si la parte baja se expresa como un número negativo, al extender el signo va a cargar con unos la parte alta.
+La parte alta con todos unos equivale a un -1 en C2, para compensar el efecto de la extensión del signo en la suma, 
+se incrementa en uno la parte alta.
+
+e) 2114
+
+f) No termina.
+
+g) PC: 0x00
+PC: 0x08
+PC: 0x10
+PC: 0x14
+PC: 0x18
+PC: 0x1c
+PC: 0x20
+PC: 0x24
+PC: 0x18
+PC: 0x1c
+PC: 0x20
+PC: 0x14
+PC: 0x18
+...
+PC: 0x14
+PC: 0x18
+...
+
+h)
+	li a0, 4228
+	srai a1, a0, 1
+	j resta 
+fin: beq zero, zero, fin 
+
+resta: sub a0, a0, a1 
+	beq a0, zero, fin 
+
+sigo: j resta 
+
+3) 
