@@ -4,8 +4,8 @@ arreglo1:
 
 arreglo2:
     .word 1, 2, 0
+    
 .text
-
 main:
     la a0, arreglo1 #caso de test1
     mv s0, a0
