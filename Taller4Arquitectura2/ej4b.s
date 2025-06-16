@@ -1,35 +1,28 @@
 #Arreglo
 .data
 arreglo1: 
-    .byte 1
-    .byte 2
-    .byte 3
-    .byte 4
-.text
-
-.data
+    .byte 1, 2, 3, 4
+    
 arreglo2: 
-    .byte 7
-    .byte 128
-    .byte 0
+    .byte 7, 128, 0
+    
 .text
-
 main:
     la a0 arreglo1 #caso de test1
     li a1 4
     li s0 3
     jal potenciaEnArreglo
-    bne a0 s0 noFunciona2
+    bne a0 s0 noFunciona
     
     la a0 arreglo2 #caso de test2
     li a1 3
     li s0 1
     jal potenciaEnArreglo
-    bne a0 s0 noFunciona2
-funciona2:
+    bne a0 s0 noFunciona
+funciona:
     li a1 1
     j fin
-noFunciona2:
+noFunciona:
     li a1 0
 fin:
     j fin
