@@ -1,12 +1,9 @@
 .data
 arreglo1:
-    .word -2
-    .word 3
+    .word -2, 3
 
 arreglo2:
-    .word 1
-    .word 2
-    .word 0
+    .word 1, 2, 0
 .text
 
 main:
