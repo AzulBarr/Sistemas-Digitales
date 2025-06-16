@@ -1,20 +1,20 @@
-main1:
+main:
     li a0 2 #caso de test1
     li s0 1
     jal esPotenciaDeDos
-    bne a0 s0 noFunciona1
+    bne a0 s0 noFunciona
     
     li a0 3 #caso de test2
     li s0 0
     jal esPotenciaDeDos
-    bne a0 s0 noFunciona1
-funciona1:
+    bne a0 s0 noFunciona
+funciona:
     li a1 1
-    j fin1
-noFunciona1:
+    j fin
+noFunciona:
     li a1 0
-fin1:
-    j fin1
+fin:
+    j fin
 
 esPotenciaDeDos: 
     li t0 1
