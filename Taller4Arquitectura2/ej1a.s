@@ -2,7 +2,7 @@ main:
     li s1, 2024 #s1 = 2024
     mv a0, s1 #a0 = s1 = 2024 
     jal ra, FUNCION #Salto incondicional a Funcion y guarda PC en ra
-    add a0, s1, a0 #Al valor de salida de la funciÛn se le suma 2024 !
+    add a0, s1, a0 #Al valor de salida de la funci√≥n se le suma 2024 !
     bnez a0, noFunciona #Si a0 no es 0, salta a noFunciona
 funciona: 
     li a1, 1 #a1 = 1
@@ -14,10 +14,10 @@ fin: j fin #termina el test
 FUNCION: 
 prologo:
     addi sp, sp, -4 #Reserva 4 direcciones de memoria para el stack
-    sw ra, (0)sp #guarda el PC donde llamaron a la funciÛn en el stack 
+    sw ra, (0)sp #guarda el PC donde llamaron a la funci√≥n en el stack 
     
     
-    #not s1, a0 ##Se guarda la negaciÛn de a0, el par·metro de la funciÛn, en s1
+    #not s1, a0 #Se guarda la negaci√≥n de a0, el par√°metro de la funci√≥n, en s1
     #addi a0, s1, 1 #a0 = s1+1 
 
     not t1, a0
@@ -27,5 +27,5 @@ epilogo:
     addi sp, sp, 4 #restaura sp
     ret #retorna, jalr zero, ra, 0
 #La podemos llamar "inverso aditivo" porque es lo que calcula.
-#El error fue que el programador A no guardÛ s1 antes de utilizarlo. 
-#DeberÌa de hacerlo ya que es un registro permanate.
+#El error fue que el programador A no guard√≥ s1 antes de utilizarlo. 
+#Deber√≠a de hacerlo ya que es un registro permanate.
