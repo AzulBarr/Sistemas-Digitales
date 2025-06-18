@@ -17,7 +17,7 @@ fin: j fin
 
 FUNCION: 
 prologo:
-    addi sp, sp, -12
+    addi sp, sp, -16
     sw a2, (0)sp
     sw s0, (4)sp
     sw ra, (8)sp
@@ -35,12 +35,12 @@ prologo:
 return: #epilogo
     lw s0, (4)sp
     lw ra, (8)sp
-    addi sp, sp, 12
+    addi sp, sp, 16
     ret #si  a0 <= a4 <= a1 y a2 <= a5 <= a3 -> a0=1
 
 FUNCION_AUX: #a0 <= a2 <= a1 -> a0=1
 prologo_Aux:
-    addi sp, sp, -4
+    addi sp, sp, -16
     sw ra, (0)sp
     
     sub t0, a2, a0
@@ -54,5 +54,5 @@ afuera:
     li a0, 0 #si a2<a1 o a2>a0
 terminar: 
     lw ra, (0)sp
-    addi sp, sp, 4
+    addi sp, sp, 16
     ret
