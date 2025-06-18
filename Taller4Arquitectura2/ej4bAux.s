@@ -16,6 +16,7 @@ noFunciona:
 fin:
     j fin
 
+
 esPotenciaDeDos: 
     li t0 1
     li t1 8
