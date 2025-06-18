@@ -15,7 +15,7 @@ fin: j fin
 
 FUNCION: #Minimode4
 prologo1:
-    addi sp, sp, -12
+    addi sp, sp, -16
     sw a2, (0)sp
     sw a3, (4)sp
     sw ra, (8)sp
@@ -32,12 +32,12 @@ prologo1:
     
 epilogo:
     lw ra, (8)sp
-    addi sp, sp, 12
+    addi sp, sp, 16
     ret
     
 FUNCION_AUX: #Minimode2
 prologo2:
-    addi sp, sp, -4
+    addi sp, sp, -16
     sw ra, (0)sp
 #devuelve el menor
     bgt a1, a0, terminar
@@ -46,7 +46,7 @@ terminar: #epilogo
 #nosotras corregimos al restaurar todo en el epilogo
 epilogo2:
     lw ra (0)sp
-    addi sp, sp, 4
+    addi sp, sp, 16
     
     ret #el ret ya estaba
 
