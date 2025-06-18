@@ -15,6 +15,7 @@ noFunciona:
 fin:
 	j fin    
 
+
 invertir:
     sub a0 zero a0
     ret
