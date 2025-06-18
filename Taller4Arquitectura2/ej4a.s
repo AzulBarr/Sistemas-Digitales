@@ -38,10 +38,11 @@ noFunciona:
 	li a1, 0
 fin:
     j fin
+
     
 invertirArreglo:
 prologo:
-    addi sp sp -12
+    addi sp sp -16
     sw ra 0(sp)
     sw s0 4(sp)
     sw s1 8(sp)
@@ -61,6 +62,7 @@ epilogo:
     lw s1 8(sp)
     addi sp sp 12
     ret
+
 
 invertir:
     sub a0 zero a0
