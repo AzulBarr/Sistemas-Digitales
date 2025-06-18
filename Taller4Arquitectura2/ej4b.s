@@ -26,6 +26,7 @@ noFunciona:
     li a1 0
 fin:
     j fin
+
      
 potenciaEnArreglo:
 prologo:
