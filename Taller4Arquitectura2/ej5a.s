@@ -14,10 +14,11 @@ noFunciona:
     li a0 0
 fin:
     j fin
+
     
 factorial:
 prologo:
-    addi sp sp -8
+    addi sp sp -16
     sw a0 4(sp) 
     sw ra 0(sp) 
 
@@ -37,6 +38,7 @@ else:
     lw ra, 0(sp)
     addi sp, sp, 8
     ret
+
     
 multiplicar:
     mv a2, a0
